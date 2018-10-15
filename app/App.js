@@ -124,11 +124,9 @@ class App extends React.Component {
     return (
       <div>
         <TopBar {...this.state}
-                onPeriodChange={this._changePeriod.bind(this)}
-                onProfileChange={this._changeProfile.bind(this)} />
-
+          onPeriodChange={this._changePeriod.bind(this)}
+          onProfileChange={this._changeProfile.bind(this)} />
         {this.state.loading ? <Loader /> : <Dashboard {...this.state} />}
-
         <Footer />
       </div>
     )
