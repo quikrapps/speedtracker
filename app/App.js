@@ -32,6 +32,7 @@ class App extends React.Component {
     }
 
     this.baseUrl = window.BASE_URL || ''
+    this.dataUrl = window.DATA_URL || ''
   }
 
   _fetchData (dateFrom, dateTo) {
@@ -46,7 +47,7 @@ class App extends React.Component {
       const year = test.toString().slice(0, 4)
       const month = test.toString().slice(4, 6)
 
-      const path = `${this.baseUrl}/results/${this.state.profile.slug}/${year}/${month}.json`
+      const path = `${this.dataUrl}/results/${this.state.profile.slug}/${year}/${month}.json`
 
       return window.fetch(path).then(response => {
         return response.json()
@@ -92,7 +93,7 @@ class App extends React.Component {
 
     window.history.pushState(null, null, `${this.baseUrl}/${newProfile}/?period=${this.state.period}`)
 
-    window.fetch(`${this.baseUrl}/profiles.json`).then(response => {
+    window.fetch(`${this.dataUrl}/profiles.json`).then(response => {
       return response.json()
     }).then(profiles => {
       const profile = profiles.find(profile => profile.slug === newProfile)
@@ -123,8 +124,8 @@ class App extends React.Component {
     return (
       <div>
         <TopBar {...this.state}
-          onPeriodChange={this._changePeriod.bind(this)}
-          onProfileChange={this._changeProfile.bind(this)} />
+                onPeriodChange={this._changePeriod.bind(this)}
+                onProfileChange={this._changeProfile.bind(this)} />
 
         {this.state.loading ? <Loader /> : <Dashboard {...this.state} />}
 
